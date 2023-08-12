@@ -26,6 +26,7 @@ if(isset($_POST['app-submit']))
   $contact = $_SESSION['contact'];
   $doctor=$_POST['doctor'];
   $email=$_SESSION['email'];
+  # $fees=$_POST['fees'];
   $docFees=$_POST['docFees'];
 
   $appdate=$_POST['appdate'];
@@ -365,6 +366,51 @@ function get_specs(){
                 document.getElementById('docFees').value = selection;
               };
             </script>
+
+                  
+                  
+
+                  
+                        <!-- <div class="col-md-4"><label for="doctor">Doctors:</label></div>
+                                <div class="col-md-8">
+                                    <select name="doctor" class="form-control" id="doctor1" required="required">
+                                      <option value="" disabled selected>Select Doctor</option>
+                                      
+                                    </select>
+                                </div>
+                                <br><br> -->
+
+                                <!-- <script>
+                                  document.getElementById("spec").onchange = function updateSpecs(event) {
+                                      var selected = document.querySelector(`[data-value=${this.value}]`).getAttribute("value");
+                                      console.log(selected);
+
+                                      var options = document.getElementById("doctor1").querySelectorAll("option");
+
+                                      for (i = 0; i < options.length; i++) {
+                                        var currentOption = options[i];
+                                        var category = options[i].getAttribute("data-spec");
+
+                                        if (category == selected) {
+                                          currentOption.style.display = "block";
+                                        } else {
+                                          currentOption.style.display = "none";
+                                        }
+                                      }
+                                    }
+                                </script> -->
+
+                        
+                    <!-- <script>
+                    let data = 
+                
+              document.getElementById('spec').onchange = function updateSpecs(e) {
+                let values = data.filter(obj => obj.spec == this.value).map(o => o.username);   
+                document.getElementById('doctor1').value = document.querySelector(`[value=${values}]`).getAttribute('data-value');
+              };
+            </script> -->
+
+
                   
                   <div class="col-md-4"><label for="consultancyfees">
                                 Consultancy Fees
@@ -476,8 +522,7 @@ function get_specs(){
 
 
 
-      <div class="tab-pane fade" id="
-      " role="tabpanel" aria-labelledby="list-pres-list">
+      <div class="tab-pane fade" id="list-pres" role="tabpanel" aria-labelledby="list-pres-list">
         
               <table class="table table-hover">
                 <thead>
@@ -519,6 +564,10 @@ function get_specs(){
                         <td><?php echo $row['prescription'];?></td>
                         <td>
                           <form method="get">
+                          <!-- <a href="admin-panel.php?ID=" 
+                              onClick=""
+                              title="Pay Bill" tooltip-placement="top" tooltip="Remove"><button class="btn btn-success">Pay</button>
+                              </a></td> -->
 
                               <a href="./patient-panel.php?php echo $row['ID']?>">
                               <input type ="hidden" name="ID" value="<?php echo $row['ID']?>"/>
@@ -539,7 +588,7 @@ function get_specs(){
 
 
 
-      <div class="tab-pane fade" id="" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
       <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
         <form class="form-group" method="post" action="../progress/func.php">
           <label>Doctors name: </label>
@@ -553,6 +602,8 @@ function get_specs(){
   </div>
 </div>
    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
