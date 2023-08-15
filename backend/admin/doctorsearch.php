@@ -11,8 +11,8 @@
 include("../progress/newfunc.php");
 if(isset($_POST['doctor_search_submit']))
 {
-	$contact=$_POST['doctor_contact'];
-  $query = "select * from doctb where email= '$contact'";
+	$username=$_POST['username'];
+  $query = "select * from doctb where username= '$username'";
   $result = mysqli_query($con,$query);
   $row=mysqli_fetch_array($result);
   if($row['username']=="" & $row['password']=="" & $row['email']=="" & $row['docFees']==""){
@@ -30,6 +30,7 @@ if(isset($_POST['doctor_search_submit']))
       <th scope='col'>Password</th>
       <th scope='col'>Email</th>
       <th scope='col'>Consultancy Fees</th>
+      <th scope='col'>Specialization</th>
     </tr>
   </thead>
   <tbody>";
@@ -39,11 +40,13 @@ if(isset($_POST['doctor_search_submit']))
         $password = $row['password'];
         $email = $row['email'];
         $docFees = $row['docFees'];
+        $spec = $row['spec'];
         echo "<tr>
           <td>$username</td>
           <td>$password</td>
           <td>$email</td>
           <td>$docFees</td>
+          <td>$spec</td>
         </tr>";
 	// }
 	echo "</tbody></table><center><a href='admin-panel.php' class='btn btn-light'>Back to dashboard</a></div></center></div></div></div>";

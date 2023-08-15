@@ -7,14 +7,14 @@
 </head>
 <body>
 <?php
-include("./progress/newfunc.php");
+include("../progress/newfunc.php");
 if(isset($_POST['patient_search_submit']))
 {
-	$contact=$_POST['patient_contact'];
-	$query = "select * from patreg where contact= '$contact'";
+	$fname=$_POST['fname'];
+	$query = "select * from patreg where fname= '$fname'";
   $result = mysqli_query($con,$query);
   $row=mysqli_fetch_array($result);
-  if($row['lname']=="" & $row['email']=="" & $row['contact']=="" & $row['password']==""){
+  if($row['lname']=="" & $row['email']=="" & $row['fname']=="" & $row['password']==""){
     echo "<script> alert('No entries found! Please enter valid details'); 
           window.location.href = 'admin-panel.php#list-doc';</script>";
   }
@@ -27,6 +27,7 @@ if(isset($_POST['patient_search_submit']))
     <tr>
       <th scope='col'>First Name</th>
       <th scope='col'>Last Name</th>
+      <th scope='col'>Gender</th>
       <th scope='col'>Email</th>
       <th scope='col'>Contact</th>
       <th scope='col'>Password</th>
@@ -37,12 +38,14 @@ if(isset($_POST['patient_search_submit']))
 	
 		    $fname = $row['fname'];
         $lname = $row['lname'];
+        $gender = $row['gender'];
         $email = $row['email'];
         $contact = $row['contact'];
         $password = $row['password'];
         echo "<tr>
           <td>$fname</td>
           <td>$lname</td>
+          <td>$gender</td>
           <td>$email</td>
           <td>$contact</td>
           <td>$password</td>

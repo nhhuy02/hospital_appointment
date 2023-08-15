@@ -12,11 +12,11 @@
 include("../progress/newfunc.php");
 if(isset($_POST['app_search_submit']))
 {
-	$contact=$_POST['app_contact'];
-	$query = "select * from appointmenttb where contact= '$contact';";
+	$fname=$_POST['fname'];
+	$query = "select * from appointmenttb where fname= '$fname';";
   $result = mysqli_query($con,$query);
   $row=mysqli_fetch_array($result);
-  if($row['fname']=="" & $row['lname']=="" & $row['email']=="" & $row['contact']=="" & $row['doctor']=="" & $row['docFees']=="" & $row['appdate']=="" & $row['apptime']==""){
+  if($row['fname']=="" & $row['lname']=="" & $row['email']=="" & $row['fname']=="" & $row['doctor']=="" & $row['docFees']=="" & $row['appdate']=="" & $row['apptime']==""){
     echo "<script> alert('No entries found! Please enter valid details'); 
           window.location.href = 'admin-panel.php#list-doc';</script>";
   }

@@ -10,11 +10,11 @@
 include("../progress/newfunc.php");
 if(isset($_POST['mes_search_submit']))
 {
-	$contact=$_POST['mes_contact'];
-	$query = "select * from contact where contact= '$contact'";
+	$name=$_POST['name'];
+	$query = "select * from contact where name= '$name'";
   $result = mysqli_query($con,$query);
   $row=mysqli_fetch_array($result);
-  if($row['name']=="" & $row['email']=="" & $row['contact']=="" & $row['message']==""){
+  if($row['name']=="" & $row['email']=="" & $row['name']=="" & $row['message']==""){
     echo "<script> alert('No entries found! Please enter valid details'); 
           window.location.href = './admin/admin-panel.php#list-doc';</script>";
   } 

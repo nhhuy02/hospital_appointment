@@ -501,10 +501,10 @@ function get_specs(){
 
                         <td>
                         <?php if(($row['userStatus']==1) && ($row['doctorStatus']==1))  
-                        { ?>
+                         { ?>
 
 													
-	                        <a href="./patient-panel.php?php echo $row['ID']?>&cancel=update" 
+	                        <a href="patient-panel.php?ID=<?php echo $row['ID']?>&cancel=update" 
                               onClick="return confirm('Are you sure you want to cancel this appointment ?')"
                               title="Cancel Appointment" tooltip-placement="top" tooltip="Remove"><button class="btn btn-danger">Cancel</button></a>
 	                        <?php } else {

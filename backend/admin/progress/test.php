@@ -2,7 +2,7 @@
 <?php
 $con = mysqli_connect("localhost", "root", "", "myhmsdb");
 
-// include('../progress/newfunc.php');
+include('../progress/newfunc.php');
 
 ?>
 <html lang="en">
@@ -115,7 +115,7 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
           <a class="list-group-item list-group-item-action active" id="list-dash-list" data-toggle="list"
             href="#list-dash" role="tab" aria-controls="home">Dashboard</a>
           <a class="list-group-item list-group-item-action" href="#list-doc" id="list-doc-list" role="tab"
-            aria-controls="home" data-toggle="list">Manage Doctor</a>
+            aria-controls="home" data-toggle="list">Doctor List</a>
           <a class="list-group-item list-group-item-action" href="#list-pat" id="list-pat-list" role="tab"
             data-toggle="list" aria-controls="home">Patient List</a>
           <a class="list-group-item list-group-item-action" href="#list-app" id="list-app-list" role="tab"
@@ -236,7 +236,7 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
 
 
 
-          <div class="tab-pane fade" id="list-doc" role="tabpanel" >
+          <div class="tab-pane fade" id="list-doc" role="tabpanel" aria-labelledby="list-home-list">
 
 
             <div class="col-md-8">
@@ -263,31 +263,13 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                 </tr>
               </thead>
               <tbody>
+                
                 <?php
                 $con = mysqli_connect("localhost", "root", "", "myhmsdb");
-                // global $con;
+                global $con;
                 $query = "select * from doctb";
                 $result = mysqli_query($con, $query);
-                
-                $num = mysqli_num_rows($result);
-                $numberPages = 5;
-                $totalPages = ceil($num / $numberPages);
-                for($btn = 1; $btn <= $totalPages; $btn++){
-                  echo '<button class="btn btn-secondary mx-1 my-3"><a href="admin-panel.php?docpage='.$btn.'"  class="text-white">'.$btn.'</a></button>';
-                }
-
-                if(isset($_GET['docpage'])){
-                  $docpage = $_GET['docpage'];
-                }
-                else{
-                  $docpage = 1;
-                }
-
-                $startinglimit = ($docpage - 1) * $numberPages;
-                $query = "select * from doctb limit $startinglimit,$numberPages ";
-                $result = mysqli_query($con, $query);
-
-                while ($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_array($result)) {
                   $id = $row['id'];
                   $image = $row['image'];
                   $username = $row['username'];
@@ -295,7 +277,7 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                   $email = $row['email'];
                   $password = $row['password'];
                   $docFees = $row['docFees'];
-
+                  
 
                   echo "<tr>
                     <td>$id</td>
@@ -310,7 +292,9 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                     <button class='btn btn-danger'><a href='./progress/delete_doctor.php?id=$row[id]' class='text-white text-capitalize text-decoration-none' onclick=\"return confirm('Do you really want to update?')\">Delete</a></button>
                   </td>
                   </tr>";
+
                 }
+
                 ?>
               </tbody>
             </table>
@@ -347,24 +331,6 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                 $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                 global $con;
                 $query = "select * from patreg";
-                $result = mysqli_query($con, $query);
-
-                $num = mysqli_num_rows($result);
-                $numberPages = 5;
-                $totalPages = ceil($num / $numberPages);
-                for($btn = 1; $btn <= $totalPages; $btn++){
-                  echo '<button class="btn btn-secondary mx-1 my-3"><a href="admin-panel.php?patpage='.$btn.'"  class="text-white">'.$btn.'</a></button>';
-                }
-
-                if(isset($_GET['patpage'])){
-                  $patpage = $_GET['patpage'];
-                }
-                else{
-                  $patpage = 1;
-                }
-
-                $startinglimit = ($patpage - 1) * $numberPages;
-                $query = "select * from patreg limit $startinglimit,$numberPages ";
                 $result = mysqli_query($con, $query);
                 while ($row = mysqli_fetch_array($result)) {
                   $pid = $row['pid'];
@@ -422,25 +388,6 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                     global $con;
                     $query = "select * from prestb";
                     $result = mysqli_query($con, $query);
-
-                    $num = mysqli_num_rows($result);
-                    $numberPages = 5;
-                    $totalPages = ceil($num / $numberPages);
-                    for($btn = 1; $btn <= $totalPages; $btn++){
-                      echo '<button class="btn btn-secondary mx-1 my-3"><a href="admin-panel.php?prespage='.$btn.'"  class="text-white">'.$btn.'</a></button>';
-                    }
-    
-                    if(isset($_GET['prespage'])){
-                      $prespage = $_GET['prespage'];
-                    }
-                    else{
-                      $prespage = 1;
-                    }
-    
-                    $startinglimit = ($prespage - 1) * $numberPages;
-                    $query = "select * from prestb limit $startinglimit,$numberPages ";
-                    $result = mysqli_query($con, $query);
-
                     while ($row = mysqli_fetch_array($result)) {
                       $doctor = $row['doctor'];
                       $pid = $row['pid'];
@@ -517,26 +464,6 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
 
                 $query = "select * from appointmenttb;";
                 $result = mysqli_query($con, $query);
-
-
-                $num = mysqli_num_rows($result);
-                $numberPages = 5;
-                $totalPages = ceil($num / $numberPages);
-                for($btn = 1; $btn <= $totalPages; $btn++){
-                  echo '<button class="btn btn-secondary mx-1 my-3"><a href="admin-panel.php?apppage='.$btn.'"  class="text-white">'.$btn.'</a></button>';
-                }
-
-                if(isset($_GET['apppage'])){
-                  $apppage = $_GET['apppage'];
-                }
-                else{
-                  $apppage = 1;
-                }
-
-                $startinglimit = ($apppage - 1) * $numberPages;
-                $query = "select * from appointmenttb limit $startinglimit,$numberPages ";
-                $result = mysqli_query($con, $query);
-
                 while ($row = mysqli_fetch_array($result)) {
                   ?>
                   <tr>
@@ -596,15 +523,13 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
           <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
 
           <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-            <form class="form-group" method="post" action="./progress/create_doctor.php" autocomplete="off"
-              enctype="multipart/form-data">
+            <form class="form-group" method="post" action="./progress/create_doctor.php" autocomplete="off" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-md-4"><label>Doctor Name:</label></div>
                 <div class="col-md-8"><input type="text" class="form-control" name="username"
                     onkeydown="return alphaOnly(event);" required></div><br><br>
                 <div class="col-md-4"><label>Avatar:</label></div>
-                <div class="col-md-8"><input type="file" class="form-control" name="image" accept=".jpg, .jpeg, .png"
-                    value="" required></div><br><br>
+                <div class="col-md-8"><input type="file" class="form-control" name="image" accept=".jpg, .jpeg, .png" value="" required></div><br><br>
                 <div class="col-md-4"><label>Specialization:</label></div>
                 <div class="col-md-8">
                   <select name="special" class="form-control" id="special" required="required">
@@ -664,24 +589,6 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
                 global $con;
 
                 $query = "select * from contact;";
-                $result = mysqli_query($con, $query);
-
-                $num = mysqli_num_rows($result);
-                $numberPages = 5;
-                $totalPages = ceil($num / $numberPages);
-                for($btn = 1; $btn <= $totalPages; $btn++){
-                  echo '<button class="btn btn-secondary mx-1 my-3"><a href="admin-panel.php?conpage='.$btn.'#list-mess"  class="text-white">'.$btn.'</a></button>';
-                }
-
-                if(isset($_GET['conpage'])){
-                  $conpage = $_GET['conpage'];
-                }
-                else{
-                  $conpage = 1;
-                }
-
-                $startinglimit = ($conpage - 1) * $numberPages;
-                $query = "select * from contact limit $startinglimit,$numberPages ";
                 $result = mysqli_query($con, $query);
                 while ($row = mysqli_fetch_array($result)) {
 
@@ -769,9 +676,35 @@ $con = mysqli_connect("localhost", "root", "", "myhmsdb");
     });
 
 
-
-
   </script>
 </body>
 
 </html>
+
+
+
+
+
+
+<?php
+                $sql = "select * from doctb";
+                $result = mysqli_query($con,$sql);
+                $num = mysqli_num_rows($result);
+                $numberPages = 3;
+                $totalPages = ceil($num / $numberPages);
+                for($btn = 1; $btn <= $totalPages; $btn++){
+                  echo '<button class="btn btn-secondary mx-1 my-3"><a href="admin-panel.php#list-doc?docpage='.$btn.'" class="text-white">'.$btn.'</a></button>';
+                }
+
+                if(isset($_POST['docpage'])){
+                  $docpage = $_POST['docpage'];
+                }
+                else{
+                  $docpage = 1;
+                }
+
+                $startinglimit = ($page - 1) * $numberPages;
+                $sql = "select * from doctb limit ".$startinglimit.','.$numberPages;
+                $result = mysqli_query($con, $sql);
+                
+                ?>

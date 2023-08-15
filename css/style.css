@@ -1853,6 +1853,13 @@ a.btn:focus{
 	border-bottom: 1px dotted #eee;	
 }
 
+
+#list-settings2 a{
+	width: 100px;
+	background-color: rgb(34, 179, 34);
+	color: #fff;
+}
+
 /* colors */
 
 .options_box a.t_default {
